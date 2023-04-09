@@ -35,8 +35,9 @@ public class SearchController : Controller
         {
             jobs = JobData.FindByColumnAndValue(searchType, searchTerm);  
         }
+        ViewBag.columns = ListController.ColumnChoices;
         ViewBag.jobs = jobs;
-        return View();
+        return View(jobs);
     }
 
 }
