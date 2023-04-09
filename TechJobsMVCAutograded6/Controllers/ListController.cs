@@ -52,7 +52,9 @@ public class ListController : Controller
             jobs = JobData.FindAll();
         }
         else
-        { jobs=JobData.FindByColumnAndValue(column,value); }
+        { 
+            jobs=JobData.FindByColumnAndValue(column,value); 
+        }
         ViewBag.jobs = jobs; 
         return View();
        

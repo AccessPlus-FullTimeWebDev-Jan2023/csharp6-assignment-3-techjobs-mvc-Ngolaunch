@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -19,21 +20,23 @@ public class SearchController : Controller
 
     // TODO #3 - Create an action method to process a search request
     // and render the updated search views.
-    public IActionResult Results( string searchType, string searchTerm)
+    public IActionResult Results(string searchType, string searchTerm)
     {
-        List<Job>> jobs = new List<Job> ();
+        List<Job> jobs = new List<Job> ();
         if (searchType.ToLower().Equals("all"))
         {
-             JobData.FindAll();
+             jobs= JobData.FindAll();
         }
         if (searchType == null)
         {
-            JobData.FindAll();
+            jobs= JobData.FindAll();
         }
         else
         {
-            JobData.FindByColumnAndValue(column,value);
+            jobs = JobData.FindByColumnAndValue(searchType, searchTerm);  
         }
+        ViewBag.jobs = jobs;
+        return View();
     }
 
 }
